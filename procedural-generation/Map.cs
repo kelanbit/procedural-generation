@@ -7,7 +7,7 @@ namespace procedural_generation
     public class Map
     {
         public Size Size { get; set; }
-        public Node[,] Nodes { get; set; }
+        Node[,] Nodes { get; set; }
 
         private float maxElevation;
         private float minElevation;
@@ -27,9 +27,18 @@ namespace procedural_generation
                     var nx = x / (float)width - 0.5f;
                     var ny = y / (float)height - 0.5f;
 
-                    //node.Elevation = (float)Math.Round(perlin.Noise(nx, ny, 4, 15f), 1);
-                    var elevation = perlin.Noise(nx, ny, 3, 2f);
+                    //var noise0 = perlin.Noise(nx, ny, 3, 4f);
+                    //var noise1 = 0.5 * perlin.Noise(nx * 2, ny * 2, 3, 4f);
+                    //var noise2 = 0.25 * perlin.Noise(nx * 4, ny * 2, 3, 4f);
+
+                    var noise0 = perlin.Noise(nx, ny, 2, 2f);
+                    var noise1 = 0.5 * perlin.Noise(nx, ny, 2, 2f);
+                    var noise2 = 0.25 * perlin.Noise(nx, ny, 2, 2f);
+
+                    var elevation = noise0 * (float)noise1 * (float)noise2;
+
                     var moisture = perlin.Noise(nx, ny, 2, 5);
+
 
                     Nodes[x, y] = new Node(x, y, elevation, moisture);
                 }

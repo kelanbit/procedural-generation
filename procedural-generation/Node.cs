@@ -2,7 +2,7 @@
 
 namespace procedural_generation
 {
-    public class Node
+    class Node
     {
         public Point Location { get; set; }
         public Size Size { get; set; }
@@ -20,35 +20,50 @@ namespace procedural_generation
 
         private Color GetColor()
         {
-            if (Elevation < 5)
+            if (Elevation < (float)BiomeType.Water)
             {
-                return Color.FromArgb(68, 69, 117);
+                return Color.FromArgb(62, 96, 193);
             }
-            if (Elevation < 10)
+            if (Elevation < (float)BiomeType.WaterLevel)
             {
-                return Color.FromArgb(160, 144, 128);
-
+                return Color.FromArgb(88,121,237);
             }
-            if (Elevation < 20)
+            if (Elevation < (float)BiomeType.Beach)
             {
-                return Color.FromArgb(136, 170, 84);
+                return Color.FromArgb(214, 190, 120);
             }
-            if (Elevation < 40)
+            if (Elevation < (float)BiomeType.Grassland)
             {
-                return Color.FromArgb(85, 153, 68);
+                return Color.FromArgb(116, 169, 99);
             }
-            if (Elevation < 60)
+            if (Elevation < (float)BiomeType.Forest)
             {
-                return Color.FromArgb(52, 119, 84);
+                return Color.FromArgb(62, 126, 99);
             }
-            if (Elevation < 80)
+            if (Elevation < (float)BiomeType.Tundra)
             {
-                return Color.FromArgb(136, 153, 119);
+                return Color.FromArgb(165, 189, 127);
+            }
+            if (Elevation < (float)BiomeType.HighRock)
+            {
+                return Color.FromArgb(191,211,176);
             }
             else
             {
-                return Color.FromArgb(137, 137, 137);
+                return Color.FromArgb(211, 210, 215);
             }
+        }
+
+        private enum BiomeType
+        {
+            Water=5,
+            WaterLevel=7,
+            Beach=14,
+            Grassland=35,
+            Forest=60,
+            Tundra=80,
+            HighRock=88,
+            Snow=95
         }
     }
 }
